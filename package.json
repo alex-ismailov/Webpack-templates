@@ -1,0 +1,23 @@
+{
+  "name": "WEBPACK-4-JackCoder-tutorial",
+  "version": "1.0.0",
+  "description": "tutoria по материалам курса от Jack Coder: https://www.youtube.com/watch?v=JcKRovPhGo8&list=PLkCrmfIT6LBQWN02hNj6r1daz7965GxsV",
+  "main": "index.js",
+  "author": "Ismailov Alexander",
+  "license": "MIT",
+  "scripts": {
+    "dev": "webpack-dev-server --open --mode development",
+    "build": "webpack --mode production",
+    "test": "cross-env TESTBUILD=true npx webpack --mode development && mocha test-dist/main.js --require source-map-support/register && rmdir /s/q test-dist"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.6.4",
+    "@babel/preset-env": "^7.6.3",
+    "babel-loader": "^8.0.6",
+    "path": "^0.12.7",
+    "vue": "^2.6.10",
+    "webpack": "^4.41.2",
+    "webpack-cli": "^3.3.9",
+    "webpack-dev-server": "^3.9.0"
+  }
+}
