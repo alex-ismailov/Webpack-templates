@@ -1,7 +1,7 @@
 module.exports = {
     plugins: [
         require('autoprefixer'),
-        require('css-mqpacker'), // сжимает все media query запросы в один файл
+        require('css-mqpacker'), //группирует все media запросы в складыает их рядом в app.css
         require('cssnano')({ // минификация
             preset: [
                 'default', {
