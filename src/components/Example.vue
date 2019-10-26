@@ -1,7 +1,7 @@
 <template>
     <section id="promo" style="text-align:center;">
         <div class="container">
-            <h1>Webpack message: {{ message }}</h1>
+            <h1>Vue message: {{ message }}</h1>
             <!-- Правильное подключение картинок -->
             <img src="/assets/img/webpack.jpg" alt=""> 
         </div>

@@ -1,6 +1,16 @@
 .wrapper {
     background: rgb(164, 177, 120);
-    display: flex;
+    
+    .container {
+        display: flex;
+        flex-flow: column;
+        align-items: center;;
+
+        img {
+            width: 30%;
+            height: auto;
+        }
+    }
 
     h1 {
         font-size: rem(18);
