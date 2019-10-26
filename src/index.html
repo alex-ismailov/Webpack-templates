@@ -23,9 +23,12 @@
           <div class="container">
             <h1>Webpack Template bddfbdfb</h1>
             <!-- Правильное подключение картинок -->
-            <img src="/assets/img/webpack.jpg" alt=""> 
+            <img src="/assets/img/webpack.jpg" alt="">
+            <button @click='component = !component'>Show vue component</button>
           </div>
         </section>
+        <!-- expamle vue component -->
+        <example-component v-if="component"><example-component/>
 
         <!--  expamle section 2 -->
         <section id="promo" style="text-align:center;">
@@ -37,12 +40,11 @@
             </div>
           </section>
 
-        <!-- expamle vue component -->
-        <example-component/>
+        
 
       </div> <!-- end content wrapper -->
 
-    <footer></footer>
+      <footer></footer>
 
     </div> <!-- end #app wrapper -->
   </div> <!-- end main wrapper -->

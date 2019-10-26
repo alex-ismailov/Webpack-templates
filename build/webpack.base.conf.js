@@ -2,6 +2,7 @@ const path = require('path');// рекомендуется всегда подк
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const { VueLoaderPlugin } = require('vue-loader');
 
 //Пути лучше вывести сразу в отдельную константу
 const PATHS = {
@@ -29,6 +30,14 @@ module.exports = {
                 loader: 'babel-loader', // Указываем через что необхожимо обрабатывать js файлы
                 exclude: '/node_modules/'
             }, {
+                test: /\.vue$/,
+                loader: 'vue-loader',
+                options: {
+                    loader: {
+                        scss: 'vue-style-loader!css-loader!sass-loader'
+                    }
+                }
+            },{
                 test: /\.(png|jpg|gif|svg)$/,
                 loader: 'file-loader',
                 options: {
@@ -72,8 +81,14 @@ module.exports = {
             }
         ]
     },
+    resolve: {
+        alias: {
+            'vue$': 'vue/dist/vue.js'
+        }
+    },
     //регистрируем плагины
     plugins: [
+        new VueLoaderPlugin(),
         new MiniCssExtractPlugin({
             filename: `${PATHS.assets}css/[name].css`,
         }),
