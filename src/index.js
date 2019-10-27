@@ -1,8 +1,10 @@
 import './js/common';
-import './css/main.css';
-import './scss/main.scss';
+import './assets/css/main.css';
+import './assets/scss/main.scss';
 window.Vue = require('vue');
 
+
+// Еслм мы не хотим использ. Vue в сборке, то необходимо удалить нижний блок.
 Vue.component('example-component', require('./components/Example.vue').default);
 import store from './store';
 const app = new Vue({
@@ -14,3 +16,5 @@ const app = new Vue({
     store,
     el: '#app'
 });
+// **** end Vue block****
+

@@ -3,6 +3,8 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { VueLoaderPlugin } = require('vue-loader');
+const fs = require('fs');
+
 
 //Пути лучше вывести сразу в отдельную константу
 const PATHS = {
@@ -10,6 +12,9 @@ const PATHS = {
     dist: path.join(__dirname, '../dist'),
     assets: 'assets/',
 };
+
+const PAGES_DIR = `${PATHS.src}/html`;
+const PAGES = fs.readdirSync(PAGES_DIR).filter(fileName => fileName.endsWith('.html'));
 
 module.exports = {
     // Необходимо для того чтобы получить доступ к PATHS из других конфигов
@@ -50,13 +55,7 @@ module.exports = {
                         scss: 'vue-style-loader!css-loader!sass-loader'
                     }
                 }
-            },{
-                test: /\.(png|jpg|gif|svg)$/,
-                loader: 'file-loader',
-                options: {
-                    name: '[name].[ext]'
-                }
-            },{
+            }, {
                 test: /\.scss$/,
                 use: [
                     'style-loader',
@@ -72,7 +71,7 @@ module.exports = {
                         options: { sourceMap: true}
                     }
                 ]
-            }, {
+            }, { // исключительно для примера, если вдруг мы используем css
                 test: /\.css$/,
                 use: [
                     'style-loader',
@@ -105,14 +104,20 @@ module.exports = {
         new MiniCssExtractPlugin({
             filename: `${PATHS.assets}css/[name].[hash].css`,
         }),
-        new HtmlWebpackPlugin({
-            template: `${PATHS.src}/index.html`,
-            filename: './index.html',
-            inject: false
-        }),
+        // new HtmlWebpackPlugin({
+        //     template: `${PATHS.src}/index.html`,
+        //     filename: './index.html',
+        // }),
         new CopyWebpackPlugin([ //каждый новый путь это новый объект
-            { from: `${PATHS.src}/img`, to: `${PATHS.assets}img`},
+            { from: `${PATHS.src}/assets/img`, to: `${PATHS.assets}img`},
             { from: `${PATHS.src}/static`, to: ''},
-        ])
+        ]),
+        // Automatic creation any html pages (Don't forget to RERUN dev server)
+        // see more: https://github.com/vedees/webpack-template/blob/master/README.md#create-another-html-files
+        // best way to create pages: https://github.com/vedees/webpack-template/blob/master/README.md#third-method-best
+        ...PAGES.map(page => new HtmlWebpackPlugin({
+            template: `${PAGES_DIR}/${page}`,
+            filename: `./${page}`
+        }))
     ]
 }
