@@ -10,6 +10,7 @@
 
 
 <script>
+//import example from '~/components/Example.vue' // https://youtu.be/jWdcw7qkqT0?list=PLkCrmfIT6LBQWN02hNj6r1daz7965GxsV&t=818
 export default {
     data () {
         return {

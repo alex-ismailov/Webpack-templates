@@ -68,7 +68,7 @@ module.exports = {
                         options: { sourceMap: true}
                     }, {
                         loader: 'postcss-loader',
-                        options: { sourceMap: true, config: {path: `${__dirname}/build/postcss.config.js`}}
+                        options: { sourceMap: true, config: {path: `./postcss.config.js`}}
                     }, {
                         loader: 'sass-loader',
                         options: { sourceMap: true}
@@ -84,11 +84,17 @@ module.exports = {
                         options: { sourceMap: true}
                     }, {
                         loader: 'postcss-loader',
-                        options: { sourceMap: true, config: {path: `${__dirname}/build/postcss.config.js`}}
+                        options: { sourceMap: true, config: {path: `./postcss.config.js`}}
                     }
                 ]
             }, {
                 test: /\.(png|jpg|gif|svg)$/,
+                loader: 'file-loader',
+                options: {
+                    name: '[name].[ext]'
+                }
+            }, {
+                test: /\.(woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
                 loader: 'file-loader',
                 options: {
                     name: '[name].[ext]'
@@ -98,6 +104,7 @@ module.exports = {
     },
     resolve: {
         alias: {
+            '~': 'src',
             'vue$': 'vue/dist/vue.js'
         }
     },
@@ -112,7 +119,8 @@ module.exports = {
         //     filename: './index.html',
         // }),
         new CopyWebpackPlugin([ //каждый новый путь это новый объект
-            { from: `${PATHS.src}/assets/img`, to: `${PATHS.assets}img`},
+            { from: `${PATHS.src}/${PATHS.assets}img`, to: `${PATHS.assets}img`},
+            { from: `${PATHS.src}/${PATHS.assets}fonts`, to: `${PATHS.assets}fonts`},
             { from: `${PATHS.src}/static`, to: ''},
         ]),
         // Automatic creation any html pages (Don't forget to RERUN dev server)
